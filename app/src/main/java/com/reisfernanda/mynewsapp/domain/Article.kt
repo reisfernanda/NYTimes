@@ -1,4 +1,4 @@
-package com.reisfernanda.mynewsapp.domain.repository
+package com.reisfernanda.mynewsapp.domain
 
 data class Article(
     val title: String,

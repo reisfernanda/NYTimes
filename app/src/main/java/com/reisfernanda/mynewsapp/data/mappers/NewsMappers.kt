@@ -2,7 +2,7 @@ package com.reisfernanda.mynewsapp.data.mappers
 
 import com.reisfernanda.mynewsapp.data.remote.ArticleDto
 import com.reisfernanda.mynewsapp.data.remote.NewsDto
-import com.reisfernanda.mynewsapp.domain.repository.Article
+import com.reisfernanda.mynewsapp.domain.Article
 
 fun NewsDto.toDomain(): List<Article> {
     return this.news.mapNotNull {

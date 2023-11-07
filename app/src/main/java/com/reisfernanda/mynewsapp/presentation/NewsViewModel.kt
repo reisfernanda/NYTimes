@@ -16,7 +16,7 @@ class NewsViewModel @Inject constructor(
         private set
 
     fun loadNews() {
-        state = state.copy(
+        state = NewsState(
             isLoading = true,
             errorMessage = null,
             articles = null
@@ -27,13 +27,13 @@ class NewsViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 {
-                    state = state.copy(
+                    state = NewsState(
                         articles = it,
                         isLoading = false,
                         errorMessage = null
                     )
                 },{
-                    state = state.copy(
+                    state = NewsState(
                         articles = null,
                         isLoading = false,
                         errorMessage = it.message

@@ -2,7 +2,7 @@ package com.reisfernanda.mynewsapp.data.repository
 
 import com.reisfernanda.mynewsapp.data.mappers.toDomain
 import com.reisfernanda.mynewsapp.data.remote.NewsApi
-import com.reisfernanda.mynewsapp.domain.repository.Article
+import com.reisfernanda.mynewsapp.domain.Article
 import com.reisfernanda.mynewsapp.domain.repository.NewsRepository
 import io.reactivex.rxjava3.core.Observable
 import javax.inject.Inject

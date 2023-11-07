@@ -1,6 +1,6 @@
 package com.reisfernanda.mynewsapp.presentation
 
-import com.reisfernanda.mynewsapp.domain.repository.Article
+import com.reisfernanda.mynewsapp.domain.Article
 
 data class NewsState(
     val isLoading: Boolean = false,
