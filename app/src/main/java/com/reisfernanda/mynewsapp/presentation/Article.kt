@@ -1,13 +1,15 @@
 package com.reisfernanda.mynewsapp.presentation
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -20,6 +22,7 @@ import coil.compose.AsyncImage
 import com.reisfernanda.mynewsapp.domain.Article
 import com.reisfernanda.mynewsapp.presentation.theme.LightGray
 import com.reisfernanda.mynewsapp.presentation.theme.MyNewsAppTheme
+import java.util.Locale
 
 @Composable
 fun Article(
@@ -28,16 +31,26 @@ fun Article(
 ) {
     Card(
         modifier = modifier.padding(8.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = LightGray
-        )
+        colors = CardDefaults.cardColors(containerColor = LightGray)
     ) {
-        AsyncImage(
-            model = article.image,
-            contentDescription = null,
-            modifier = Modifier.fillMaxWidth(),
-            contentScale = ContentScale.FillWidth
-        )
+        Box {
+            AsyncImage(
+                model = article.image,
+                contentDescription = null,
+                modifier = Modifier.fillMaxWidth(),
+                contentScale = ContentScale.FillWidth
+            )
+            Text(
+                text = article.section.uppercase(Locale.getDefault()),
+                modifier = Modifier
+                    .padding(8.dp)
+                    .background(Color.Red, RoundedCornerShape(4.dp))
+                    .align(Alignment.BottomEnd)
+                    .padding(4.dp),
+                fontWeight = FontWeight.Bold,
+                fontSize = 14.sp,
+            )
+        }
         Text(
             text = article.title,
             fontWeight = FontWeight.Bold,
@@ -61,7 +74,8 @@ fun ArticlePreview() {
             article = Article(
                 title = "Third Article Title!",
                 abstract = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                image = "https://static01.nyt.com/images/2023/11/06/multimedia/06gaza-medics-01-gqmc/06gaza-medics-01-gqmc-superJumbo.jpg"
+                image = "https://static01.nyt.com/images/2023/11/06/multimedia/06gaza-medics-01-gqmc/06gaza-medics-01-gqmc-superJumbo.jpg",
+                section = "Politics"
             )
         )
     }

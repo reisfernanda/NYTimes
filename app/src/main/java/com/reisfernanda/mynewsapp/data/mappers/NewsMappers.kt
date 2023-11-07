@@ -16,6 +16,7 @@ private fun ArticleDto.toDomain(): Article? {
         abstract = this.abstract ?: return null,
         image = this.images?.firstOrNull {
             it.format.equals("threeByTwoSmallAt2X")
-        }?.url
+        }?.url,
+        section = subsection?.takeIf { it.isNotEmpty() } ?: section
     )
 }

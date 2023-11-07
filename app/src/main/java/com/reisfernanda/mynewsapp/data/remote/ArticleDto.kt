@@ -6,5 +6,7 @@ data class ArticleDto(
     val title: String?,
     val abstract: String?,
     @field:Json(name = "multimedia")
-    val images: List<ImageDto>?
+    val images: List<ImageDto>?,
+    val section: String,
+    val subsection: String?
 )
