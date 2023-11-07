@@ -1,4 +1,4 @@
-package com.reisfernanda.mynewsapp.presentation
+package com.reisfernanda.mynewsapp.presentation.composables
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

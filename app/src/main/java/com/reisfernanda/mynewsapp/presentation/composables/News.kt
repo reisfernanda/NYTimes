@@ -1,4 +1,4 @@
-package com.reisfernanda.mynewsapp.presentation
+package com.reisfernanda.mynewsapp.presentation.composables
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,6 +8,10 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
@@ -15,6 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.reisfernanda.mynewsapp.domain.Article
+import com.reisfernanda.mynewsapp.presentation.NewsState
 import com.reisfernanda.mynewsapp.presentation.theme.MyNewsAppTheme
 
 @Composable
@@ -22,7 +27,9 @@ fun News(
     state: NewsState,
     modifier: Modifier = Modifier
 ) {
-    Box(modifier = modifier.fillMaxSize().padding(8.dp)) {
+    Box(modifier = modifier
+        .fillMaxSize()
+        .padding(8.dp)) {
         if (state.isLoading) {
             CircularProgressIndicator(
                 modifier = Modifier.align(Alignment.Center)
