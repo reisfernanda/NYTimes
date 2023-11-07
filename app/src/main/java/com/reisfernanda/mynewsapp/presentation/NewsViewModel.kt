@@ -1,5 +1,6 @@
 package com.reisfernanda.mynewsapp.presentation
 
+import android.annotation.SuppressLint
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -15,29 +16,18 @@ class NewsViewModel @Inject constructor(
     var state by mutableStateOf(NewsState())
         private set
 
+    @SuppressLint("CheckResult")
     fun loadNews() {
-        state = NewsState(
-            isLoading = true,
-            errorMessage = null,
-            articles = null
-        )
+        state = NewsState(isLoading = true)
 
         repository.getNews()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 {
-                    state = NewsState(
-                        articles = it,
-                        isLoading = false,
-                        errorMessage = null
-                    )
+                    state = NewsState(articles = it)
                 },{
-                    state = NewsState(
-                        articles = null,
-                        isLoading = false,
-                        errorMessage = it.message
-                    )
+                    state = NewsState(errorMessage = it.message)
                 }
             )
     }

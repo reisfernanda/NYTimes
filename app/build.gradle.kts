@@ -86,7 +86,10 @@ dependencies {
     implementation("com.google.dagger:dagger:2.48.1")
     kapt("com.google.dagger:dagger-compiler:2.48.1")
 
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
     testImplementation("junit:junit:4.13.2")
+    testImplementation("io.mockk:mockk:1.13.8")
+
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
