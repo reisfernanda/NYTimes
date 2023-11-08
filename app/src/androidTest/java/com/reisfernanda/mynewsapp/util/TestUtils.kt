@@ -3,8 +3,8 @@ package com.reisfernanda.mynewsapp.util
 import com.reisfernanda.mynewsapp.domain.Article
 import com.reisfernanda.mynewsapp.presentation.NewsState
 
-fun getFakeNewsState(): NewsState {
-    return NewsState(
+fun getFakeNewsState(): NewsState.News {
+    return NewsState.News(
         articles = listOf(
             Article(
                 title = "First Article Title!",

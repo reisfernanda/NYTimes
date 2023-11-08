@@ -7,8 +7,6 @@ import io.mockk.every
 import io.mockk.mockk
 import io.reactivex.rxjava3.core.Observable
 import junit.framework.TestCase.assertEquals
-import junit.framework.TestCase.assertFalse
-import junit.framework.TestCase.assertNull
 import org.junit.Rule
 import org.junit.Test
 
@@ -29,10 +27,8 @@ class NewsViewModelTest {
         newsViewModel.loadNews()
 
         // THEN
-        with(newsViewModel.state) {
+        with(newsViewModel.state as NewsState.News) {
             assertEquals(articles, this.articles)
-            assertNull(this.errorMessage)
-            assertFalse(this.isLoading)
         }
     }
 
@@ -46,10 +42,8 @@ class NewsViewModelTest {
         newsViewModel.loadNews()
 
         // THEN
-        with(newsViewModel.state) {
+        with(newsViewModel.state as NewsState.Error) {
             assertEquals(errorMessage, this.errorMessage)
-            assertNull(this.articles)
-            assertFalse(this.isLoading)
         }
     }
 }

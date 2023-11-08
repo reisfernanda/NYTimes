@@ -2,8 +2,9 @@ package com.reisfernanda.mynewsapp.presentation
 
 import com.reisfernanda.mynewsapp.domain.Article
 
-data class NewsState(
-    val isLoading: Boolean = false,
-    val errorMessage: String ?= null,
-    val articles: List<Article> ?= null
-)
+sealed class NewsState {
+    object Idle: NewsState()
+    object Loading: NewsState()
+    data class Error(val errorMessage: String?): NewsState()
+    data class News(val articles: List<Article>): NewsState()
+}

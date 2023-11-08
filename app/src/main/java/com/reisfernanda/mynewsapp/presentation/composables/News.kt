@@ -1,57 +1,27 @@
 package com.reisfernanda.mynewsapp.presentation.composables
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.reisfernanda.mynewsapp.domain.Article
 import com.reisfernanda.mynewsapp.presentation.NewsState
 import com.reisfernanda.mynewsapp.presentation.theme.MyNewsAppTheme
 
 @Composable
 fun News(
-    state: NewsState,
+    state: NewsState.News,
     modifier: Modifier = Modifier
 ) {
-    Box(modifier = modifier
-        .fillMaxSize()
-        .padding(8.dp)) {
-        if (state.isLoading) {
-            CircularProgressIndicator(
-                modifier = Modifier.align(Alignment.Center).testTag(loadingIndicatorTag)
-            )
-        }
-
-        state.articles?.let { articles ->
-            LazyColumn(
-                content = {
-                    items(articles) {
-                        Article(article = it)
-                    }
-                }
-            )
-        }
-
-        state.errorMessage?.let {
-            Text(
-                text = it,
-                fontSize = 20.sp,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.align(Alignment.Center).testTag(errorTag)
-            )
-        }
-    }
+    LazyColumn(
+        content = {
+            items(state.articles) {
+                Article(article = it)
+            }
+        },
+        modifier = modifier
+    )
 }
 
 @Preview(showBackground = true, showSystemUi = true)
@@ -59,7 +29,7 @@ fun News(
 fun NewsPreview() {
     MyNewsAppTheme {
         News(
-            NewsState(
+            NewsState.News(
                 articles = listOf(
                     Article(
                         title = "First Article Title!",
@@ -82,21 +52,5 @@ fun NewsPreview() {
                 )
             )
         )
-    }
-}
-
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun LoadingNewsPreview() {
-    MyNewsAppTheme {
-        News(NewsState(isLoading = true))
-    }
-}
-
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun ErrorNewsPreview() {
-    MyNewsAppTheme {
-        News(NewsState(errorMessage = "Unknown error =("))
     }
 }

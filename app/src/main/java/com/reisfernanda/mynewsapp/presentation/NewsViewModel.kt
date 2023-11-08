@@ -13,21 +13,21 @@ import javax.inject.Inject
 class NewsViewModel @Inject constructor(
     private val repository: NewsRepository
 ): ViewModel() {
-    var state by mutableStateOf(NewsState())
+    var state by mutableStateOf<NewsState>(NewsState.Idle)
         private set
 
     @SuppressLint("CheckResult")
     fun loadNews() {
-        state = NewsState(isLoading = true)
+        state = NewsState.Loading
 
         repository.getNews()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 {
-                    state = NewsState(articles = it)
+                    state = NewsState.News(articles = it)
                 },{
-                    state = NewsState(errorMessage = it.message)
+                    state = NewsState.Error(errorMessage = it.message)
                 }
             )
     }
