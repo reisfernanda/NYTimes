@@ -24,7 +24,7 @@ class NewsViewModelTest {
         every { newsRepositoryMock.getNews() } returns Observable.just(articles)
 
         // WHEN
-        newsViewModel.loadNews()
+        newsViewModel.onEvent(NewsIntent.Load)
 
         // THEN
         with(newsViewModel.state as NewsState.News) {
@@ -39,7 +39,7 @@ class NewsViewModelTest {
         every { newsRepositoryMock.getNews() } returns Observable.error(Exception(errorMessage))
 
         // WHEN
-        newsViewModel.loadNews()
+        newsViewModel.onEvent(NewsIntent.Load)
 
         // THEN
         with(newsViewModel.state as NewsState.Error) {

@@ -32,7 +32,7 @@ class MainActivity : ComponentActivity() {
         appComponent = (application as NewsApp).getComponent()
         appComponent.inject(this)
 
-        viewModel.loadNews()
+        viewModel.onEvent(NewsIntent.Load)
 
         super.onCreate(savedInstanceState)
         setContent {

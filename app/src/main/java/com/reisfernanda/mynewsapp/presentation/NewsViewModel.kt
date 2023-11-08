@@ -16,8 +16,14 @@ class NewsViewModel @Inject constructor(
     var state by mutableStateOf<NewsState>(NewsState.Idle)
         private set
 
+    fun onEvent(intent: NewsIntent) {
+        when(intent) {
+            NewsIntent.Load -> loadNews()
+        }
+    }
+
     @SuppressLint("CheckResult")
-    fun loadNews() {
+    private fun loadNews() {
         state = NewsState.Loading
 
         repository.getNews()
