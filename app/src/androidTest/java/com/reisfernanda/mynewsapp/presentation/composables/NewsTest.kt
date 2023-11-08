@@ -1,6 +1,7 @@
 package com.reisfernanda.mynewsapp.presentation.composables
 
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import com.reisfernanda.mynewsapp.presentation.NewsState
 import com.reisfernanda.mynewsapp.util.getFakeNewsState
@@ -25,6 +26,8 @@ class NewsTest {
             rule.onNodeWithText(article.abstract).assertExists()
             rule.onNodeWithText(article.section.uppercase()).assertExists()
         }
+        rule.onNodeWithTag(loadingIndicatorTag).assertDoesNotExist()
+        rule.onNodeWithTag(errorTag).assertDoesNotExist()
     }
 
     @Test
@@ -36,5 +39,16 @@ class NewsTest {
         }
 
         rule.onNodeWithText(errorMessage).assertExists()
+        rule.onNodeWithTag(loadingIndicatorTag).assertDoesNotExist()
+    }
+
+    @Test
+    fun givenStateHasLoadingTrue_whenCompose_shouldShowLoadingIndicator() {
+        rule.setContent {
+            News(state = NewsState(isLoading = true))
+        }
+
+        rule.onNodeWithTag(loadingIndicatorTag).assertExists()
+        rule.onNodeWithTag(errorTag).assertDoesNotExist()
     }
 }
