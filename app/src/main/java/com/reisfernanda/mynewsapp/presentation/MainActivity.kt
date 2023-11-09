@@ -9,25 +9,26 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.reisfernanda.mynewsapp.NewsApp
-import com.reisfernanda.mynewsapp.di.AppComponent
 import com.reisfernanda.mynewsapp.presentation.composables.NewsScreen
 import com.reisfernanda.mynewsapp.presentation.theme.MyNewsAppTheme
+import javax.inject.Inject
 
 class MainActivity : ComponentActivity() {
 
-    private lateinit var appComponent: AppComponent
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
 
     private val viewModel: NewsViewModel by viewModels {
-        appComponent.viewModelsFactory()
+        viewModelFactory
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        appComponent = (application as NewsApp).getComponent()
-        appComponent.inject(this)
+        (application as NewsApp).appComponent.inject(this)
+
+        super.onCreate(savedInstanceState)
 
         viewModel.onEvent(NewsIntent.Load)
 
-        super.onCreate(savedInstanceState)
         setContent {
             MyNewsAppTheme {
                 Surface(

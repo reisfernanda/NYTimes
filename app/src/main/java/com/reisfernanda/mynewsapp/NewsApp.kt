@@ -5,7 +5,7 @@ import com.reisfernanda.mynewsapp.di.AppComponent
 import com.reisfernanda.mynewsapp.di.DaggerAppComponent
 
 class NewsApp: Application() {
-    fun getComponent(): AppComponent {
-        return DaggerAppComponent.create()
+    val appComponent: AppComponent by lazy {
+        DaggerAppComponent.create()
     }
 }
