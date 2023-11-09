@@ -4,7 +4,6 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import com.reisfernanda.mynewsapp.presentation.NewsState
-import com.reisfernanda.mynewsapp.presentation.NewsScreen
 import com.reisfernanda.mynewsapp.util.getFakeNewsState
 import org.junit.Rule
 import org.junit.Test
