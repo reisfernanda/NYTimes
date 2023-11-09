@@ -9,12 +9,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.reisfernanda.mynewsapp.presentation.theme.MyNewsAppTheme
+import com.reisfernanda.mynewsapp.presentation.theme.smallSpacing
 
 @Composable
 fun LoadingIndicator() {
-    Box(modifier = Modifier.fillMaxSize().padding(8.dp)) {
+    Box(modifier = Modifier.fillMaxSize().padding(smallSpacing)) {
         CircularProgressIndicator(
             modifier = Modifier.align(Alignment.Center).testTag(loadingIndicatorTag)
         )

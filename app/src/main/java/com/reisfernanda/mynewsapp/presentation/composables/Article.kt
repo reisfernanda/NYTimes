@@ -24,6 +24,8 @@ import com.reisfernanda.mynewsapp.R
 import com.reisfernanda.mynewsapp.domain.Article
 import com.reisfernanda.mynewsapp.presentation.theme.LightGray
 import com.reisfernanda.mynewsapp.presentation.theme.MyNewsAppTheme
+import com.reisfernanda.mynewsapp.presentation.theme.smallSpacing
+import com.reisfernanda.mynewsapp.presentation.theme.xSmallSpacing
 import java.util.Locale
 
 @Composable
@@ -32,7 +34,7 @@ fun Article(
     modifier: Modifier = Modifier
 ) {
     Card(
-        modifier = modifier.padding(8.dp),
+        modifier = modifier.padding(smallSpacing),
         colors = CardDefaults.cardColors(containerColor = LightGray)
     ) {
         Box {
@@ -46,10 +48,10 @@ fun Article(
             Text(
                 text = article.section.uppercase(Locale.getDefault()),
                 modifier = Modifier
-                    .padding(8.dp)
+                    .padding(smallSpacing)
                     .background(Color.Red, RoundedCornerShape(4.dp))
                     .align(Alignment.BottomEnd)
-                    .padding(4.dp),
+                    .padding(xSmallSpacing),
                 fontWeight = FontWeight.Bold,
                 fontSize = 14.sp,
             )
@@ -58,13 +60,13 @@ fun Article(
             text = article.title,
             fontWeight = FontWeight.Bold,
             fontSize = 18.sp,
-            modifier = Modifier.padding(8.dp)
+            modifier = Modifier.padding(smallSpacing)
         )
         Text(
             text = article.abstract,
             textAlign = TextAlign.Justify,
             fontSize = 14.sp,
-            modifier = Modifier.padding(8.dp)
+            modifier = Modifier.padding(smallSpacing)
         )
     }
 }

@@ -10,13 +10,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.reisfernanda.mynewsapp.presentation.theme.MyNewsAppTheme
+import com.reisfernanda.mynewsapp.presentation.theme.smallSpacing
 
 @Composable
 fun Error(errorMessage: String) {
-    Box(modifier = Modifier.fillMaxSize().padding(8.dp)) {
+    Box(modifier = Modifier.fillMaxSize().padding(smallSpacing)) {
         Text(
             text = errorMessage,
             fontSize = 20.sp,
