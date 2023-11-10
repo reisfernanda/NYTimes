@@ -13,10 +13,10 @@ import androidx.compose.ui.unit.sp
 import com.reisfernanda.mynewsapp.presentation.theme.smallSpacing
 
 @Composable
-fun SectionScreen() {
+fun SectionScreen(section: String) {
     Box(modifier = Modifier.fillMaxSize().padding(smallSpacing)) {
         Text(
-            text = "This is the screen for the section.",
+            text = "This is the screen for the section: $section",
             fontSize = 20.sp,
             textAlign = TextAlign.Center,
             modifier = Modifier

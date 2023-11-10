@@ -4,7 +4,6 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.reisfernanda.mynewsapp.presentation.AppScreens
 import com.reisfernanda.mynewsapp.presentation.NewsState
 
 @Composable
@@ -14,16 +13,25 @@ fun NewsNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = AppScreens.NewsList.name
+        startDestination = NewsList.route
     ) {
-        composable(route = AppScreens.NewsList.name) {
-            NewsScreen(newsState) {
-                navController.navigate(AppScreens.Section.name)
-            }
+        composable(route = NewsList.route) {
+            NewsScreen(
+                state = newsState,
+                onSectionClicked = { section ->
+                    navController.navigate(
+                        "${SectionDetails.route}/$section"
+                    )
+                }
+            )
         }
 
-        composable(route = AppScreens.Section.name) {
-            SectionScreen()
+        composable(
+            route = SectionDetails.routeWithArgs,
+            arguments = SectionDetails.arguments
+        ) { navBackStackEntry ->
+            val section = navBackStackEntry.arguments?.getString(SectionDetails.sectionArg).orEmpty()
+            SectionScreen(section)
         }
     }
 }
