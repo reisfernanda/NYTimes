@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
@@ -14,6 +15,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -31,7 +34,8 @@ import java.util.Locale
 @Composable
 fun Article(
     article: Article,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onSectionClicked: (String) -> Unit = {}
 ) {
     Card(
         modifier = modifier.padding(smallSpacing),
@@ -45,15 +49,18 @@ fun Article(
                 contentScale = ContentScale.FillWidth,
                 placeholder = painterResource(id = R.drawable.placeholder_image)
             )
-            Text(
-                text = article.section.uppercase(Locale.getDefault()),
+            ClickableText(
+                text = AnnotatedString(article.section.uppercase(Locale.getDefault())),
+                onClick = { onSectionClicked.invoke(article.section) },
                 modifier = Modifier
                     .padding(smallSpacing)
                     .background(Color.Red, RoundedCornerShape(4.dp))
                     .align(Alignment.BottomEnd)
                     .padding(xSmallSpacing),
-                fontWeight = FontWeight.Bold,
-                fontSize = 14.sp,
+                style = TextStyle(
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 14.sp
+                )
             )
         }
         Text(
@@ -81,7 +88,8 @@ fun ArticlePreview() {
                 abstract = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 image = "https://static01.nyt.com/images/2023/11/06/multimedia/06gaza-medics-01-gqmc/06gaza-medics-01-gqmc-superJumbo.jpg",
                 section = "Politics"
-            )
+            ),
+            onSectionClicked = {}
         )
     }
 }

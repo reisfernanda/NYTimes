@@ -8,8 +8,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.reisfernanda.mynewsapp.NewsApp
-import com.reisfernanda.mynewsapp.presentation.composables.NewsScreen
+import com.reisfernanda.mynewsapp.presentation.composables.NewsNavHost
 import com.reisfernanda.mynewsapp.presentation.theme.MyNewsAppTheme
 import javax.inject.Inject
 
@@ -35,7 +37,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    NewsScreen(viewModel.state)
+                    val navController: NavHostController = rememberNavController()
+                    NewsNavHost(navController = navController, newsState = viewModel.state)
                 }
             }
         }

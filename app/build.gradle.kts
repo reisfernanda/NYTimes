@@ -84,6 +84,8 @@ dependencies {
     implementation("com.squareup.retrofit2:adapter-rxjava3:2.9.0")
     implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.3")
     implementation("com.google.dagger:dagger:2.48.1")
+    implementation("androidx.navigation:navigation-compose:2.7.5")
+
     kapt("com.google.dagger:dagger-compiler:2.48.1")
 
     testImplementation("androidx.arch.core:core-testing:2.2.0")

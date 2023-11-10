@@ -12,12 +12,13 @@ import com.reisfernanda.mynewsapp.presentation.theme.MyNewsAppTheme
 @Composable
 fun News(
     state: NewsState.News,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onSectionClicked: (String) -> Unit = {}
 ) {
     LazyColumn(
         content = {
             items(state.articles) {
-                Article(article = it)
+                Article(article = it, onSectionClicked = onSectionClicked)
             }
         },
         modifier = modifier
@@ -50,7 +51,8 @@ fun NewsPreview() {
                         section = "Politics"
                     )
                 )
-            )
+            ),
+            onSectionClicked = {}
         )
     }
 }

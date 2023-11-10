@@ -3,12 +3,13 @@ package com.reisfernanda.mynewsapp.presentation.composables
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.reisfernanda.mynewsapp.domain.Article
 import com.reisfernanda.mynewsapp.R
 import com.reisfernanda.mynewsapp.presentation.NewsState
 import com.reisfernanda.mynewsapp.presentation.theme.MyNewsAppTheme
 
 @Composable
-fun NewsScreen(state: NewsState) {
+fun NewsScreen(state: NewsState, onSectionClicked: (String) -> Unit = {}) {
     when(state) {
         NewsState.Idle -> {}
         NewsState.Loading -> { LoadingIndicator() }
@@ -18,7 +19,7 @@ fun NewsScreen(state: NewsState) {
                     ?: stringResource(R.string.unknown_error)
             )
         }
-        is NewsState.News -> News(state = state)
+        is NewsState.News -> News(state = state, onSectionClicked = onSectionClicked)
     }
 }
 
@@ -29,26 +30,27 @@ fun NewsScreenPreview() {
         NewsScreen(
             NewsState.News(
                 articles = listOf(
-                    com.reisfernanda.mynewsapp.domain.Article(
+                    Article(
                         title = "First Article Title!",
                         abstract = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
                         image = "https://static01.nyt.com/images/2023/11/04/multimedia/2023-10-30-november-polls-topics_tables/2023-10-30-november-polls-topics_tables-superJumbo-v12.jpg",
                         section = "Politics"
                     ),
-                    com.reisfernanda.mynewsapp.domain.Article(
+                    Article(
                         title = "Second Article Title!",
                         abstract = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                         image = null,
                         section = "Politics"
                     ),
-                    com.reisfernanda.mynewsapp.domain.Article(
+                    Article(
                         title = "Third Article Title!",
                         abstract = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                         image = "https://static01.nyt.com/images/2023/11/06/multimedia/06gaza-medics-01-gqmc/06gaza-medics-01-gqmc-superJumbo.jpg",
                         section = "Politics"
                     )
                 )
-            )
+            ),
+            onSectionClicked = {}
         )
     }
 }
@@ -57,7 +59,7 @@ fun NewsScreenPreview() {
 @Composable
 fun LoadingNewsPreview() {
     MyNewsAppTheme {
-        NewsScreen(NewsState.Loading)
+        NewsScreen(NewsState.Loading, onSectionClicked = {})
     }
 }
 
@@ -65,6 +67,9 @@ fun LoadingNewsPreview() {
 @Composable
 fun ErrorNewsPreview() {
     MyNewsAppTheme {
-        NewsScreen(NewsState.Error(errorMessage = "Unknown error =("))
+        NewsScreen(
+            NewsState.Error(errorMessage = "Unknown error =("),
+            onSectionClicked = {}
+        )
     }
 }
