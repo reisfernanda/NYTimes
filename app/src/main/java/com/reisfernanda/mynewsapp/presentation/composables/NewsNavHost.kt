@@ -28,7 +28,8 @@ fun NewsNavHost(
 
         composable(
             route = SectionDetails.routeWithArgs,
-            arguments = SectionDetails.arguments
+            arguments = SectionDetails.arguments,
+            deepLinks = SectionDetails.deepLinks
         ) { navBackStackEntry ->
             val section = navBackStackEntry.arguments?.getString(SectionDetails.sectionArg).orEmpty()
             SectionScreen(section)

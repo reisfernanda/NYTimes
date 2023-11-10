@@ -2,6 +2,7 @@ package com.reisfernanda.mynewsapp.presentation.composables
 
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
+import androidx.navigation.navDeepLink
 
 interface NewsDestination {
     val route: String
@@ -17,5 +18,10 @@ object SectionDetails: NewsDestination {
     val routeWithArgs = "$route/{$sectionArg}"
     val arguments = listOf(
         navArgument(sectionArg) { type = NavType.StringType }
+    )
+    val deepLinks = listOf(
+        navDeepLink {
+            uriPattern = "news://$route/{$sectionArg}"
+        }
     )
 }
