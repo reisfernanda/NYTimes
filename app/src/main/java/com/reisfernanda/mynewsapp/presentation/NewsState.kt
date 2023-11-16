@@ -6,5 +6,5 @@ sealed class NewsState {
     object Idle: NewsState()
     object Loading: NewsState()
     data class Error(val errorMessage: String?): NewsState()
-    data class News(val articles: List<Article>): NewsState()
+    data class News(val articles: List<Article>, val section: String? = null): NewsState()
 }

@@ -1,28 +1,53 @@
 package com.reisfernanda.mynewsapp.presentation.composables
 
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.sp
 import com.reisfernanda.mynewsapp.domain.Article
 import com.reisfernanda.mynewsapp.presentation.NewsState
 import com.reisfernanda.mynewsapp.presentation.theme.MyNewsAppTheme
+import com.reisfernanda.mynewsapp.presentation.theme.smallSpacing
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun News(
     state: NewsState.News,
     modifier: Modifier = Modifier,
     onSectionClicked: (String) -> Unit = {}
 ) {
-    LazyColumn(
-        content = {
-            items(state.articles) {
-                Article(article = it, onSectionClicked = onSectionClicked)
+    Column(modifier = modifier) {
+        LazyColumn(
+            content = {
+                state.section?.let {
+                    stickyHeader {
+                        Surface(Modifier.fillParentMaxWidth()) {
+                            Text(
+                                text = "Latest ${state.section} news",
+                                fontSize = 20.sp,
+                                fontWeight = FontWeight.Bold,
+                                textAlign = TextAlign.Center,
+                                modifier = Modifier.padding(smallSpacing)
+                            )
+                        }
+                    }
+                }
+                items(state.articles) {
+                    Article(article = it, onSectionClicked = onSectionClicked)
+                }
             }
-        },
-        modifier = modifier
-    )
+        )
+    }
+
 }
 
 @Preview(showBackground = true, showSystemUi = true)

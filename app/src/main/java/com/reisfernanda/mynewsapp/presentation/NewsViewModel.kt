@@ -19,6 +19,7 @@ class NewsViewModel @Inject constructor(
     fun onEvent(intent: NewsIntent) {
         when(intent) {
             NewsIntent.Load -> loadNews()
+            is NewsIntent.LoadSection -> loadSectionNews(intent.section)
         }
     }
 
@@ -32,6 +33,38 @@ class NewsViewModel @Inject constructor(
             .subscribe(
                 {
                     state = NewsState.News(articles = it)
+                },{
+                    state = NewsState.Error(errorMessage = it.message)
+                }
+            )
+    }
+
+    @SuppressLint("CheckResult")
+    private fun loadSectionNews(section: String) {
+        state = NewsState.Loading
+
+        repository.getSectionNews(section)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    state = NewsState.News(articles = it, section = section)
+                },{
+                    state = NewsState.Error(errorMessage = it.message)
+                }
+            )
+    }
+
+    @SuppressLint("CheckResult")
+    private fun loadSearchNews(section: String) {
+        state = NewsState.Loading
+
+        repository.getSearchNews(section)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    state = NewsState.News(articles = it, section = section)
                 },{
                     state = NewsState.Error(errorMessage = it.message)
                 }

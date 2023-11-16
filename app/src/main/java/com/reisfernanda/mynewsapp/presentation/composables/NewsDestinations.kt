@@ -10,6 +10,16 @@ interface NewsDestination {
 
 object NewsList: NewsDestination {
     override val route = "news_list"
+    const val sectionArg = "section"
+    val routeWithArgs = "$route/{$sectionArg}"
+    val arguments = listOf(
+        navArgument(sectionArg) { type = NavType.StringType }
+    )
+    val deepLinks = listOf(
+        navDeepLink {
+            uriPattern = "news://$route/{$sectionArg}"
+        }
+    )
 }
 
 object SectionDetails: NewsDestination {

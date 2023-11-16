@@ -38,7 +38,13 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     val navController: NavHostController = rememberNavController()
-                    NewsNavHost(navController = navController, newsState = viewModel.state)
+                    NewsNavHost(
+                        navController = navController,
+                        newsState = viewModel.state,
+                        onLoadSectionNews = {
+                            viewModel.onEvent(NewsIntent.LoadSection(it))
+                        }
+                    )
                 }
             }
         }

@@ -3,13 +3,15 @@ package com.reisfernanda.mynewsapp.presentation.composables
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.reisfernanda.mynewsapp.domain.Article
 import com.reisfernanda.mynewsapp.R
+import com.reisfernanda.mynewsapp.domain.Article
 import com.reisfernanda.mynewsapp.presentation.NewsState
 import com.reisfernanda.mynewsapp.presentation.theme.MyNewsAppTheme
 
 @Composable
-fun NewsScreen(state: NewsState, onSectionClicked: (String) -> Unit = {}) {
+fun NewsScreen(
+    state: NewsState, onSectionClicked: (String) -> Unit = {}
+) {
     when(state) {
         NewsState.Idle -> {}
         NewsState.Loading -> { LoadingIndicator() }

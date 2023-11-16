@@ -63,12 +63,14 @@ fun Article(
                 )
             )
         }
-        Text(
-            text = article.title,
-            fontWeight = FontWeight.Bold,
-            fontSize = 18.sp,
-            modifier = Modifier.padding(smallSpacing)
-        )
+        article.title?.let {
+            Text(
+                text = it,
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp,
+                modifier = Modifier.padding(smallSpacing)
+            )
+        }
         Text(
             text = article.abstract,
             textAlign = TextAlign.Justify,

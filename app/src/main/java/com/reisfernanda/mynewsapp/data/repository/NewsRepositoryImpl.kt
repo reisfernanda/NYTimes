@@ -15,4 +15,16 @@ class NewsRepositoryImpl @Inject constructor(
             it.toDomain()
         }
     }
+
+    override fun getSectionNews(section: String): Observable<List<Article>> {
+        return newsApi.getSectionNews(section).map {
+            it.toDomain()
+        }
+    }
+
+    override fun getSearchNews(searchQuery: String): Observable<List<Article>> {
+        return newsApi.searchNews(searchQuery).map {
+            it.toDomain()
+        }
+    }
 }

@@ -9,19 +9,21 @@ import com.reisfernanda.mynewsapp.presentation.NewsState
 @Composable
 fun NewsNavHost(
     navController: NavHostController,
-    newsState: NewsState
+    newsState: NewsState,
+    onLoadSectionNews: (String) -> Unit
 ) {
     NavHost(
         navController = navController,
         startDestination = NewsList.route
     ) {
-        composable(route = NewsList.route) {
+        composable(
+            route = NewsList.route
+        ) {
             NewsScreen(
                 state = newsState,
                 onSectionClicked = { section ->
-                    navController.navigate(
-                        "${SectionDetails.route}/$section"
-                    )
+                    onLoadSectionNews.invoke(section)
+                    navController.navigate(NewsList.route)
                 }
             )
         }
